@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -59,9 +58,8 @@ public class GuestbookEntryController {
     }
 */
 
-    @PutMapping
-    public ResponseEntity<GuestbookEntry> updateGuestbookEntry(@RequestBody GuestbookEntry entryToUpdate){
-        Long id = entryToUpdate.getId();
+    @PutMapping("/{id}")
+    public ResponseEntity<GuestbookEntry> updateGuestbookEntry(@PathVariable Long id, @RequestBody GuestbookEntry entryToUpdate){
         Optional<GuestbookEntry> response = repository.findById(id)
                 .map(entry -> {
                     entry.setTitle(entryToUpdate.getTitle());
